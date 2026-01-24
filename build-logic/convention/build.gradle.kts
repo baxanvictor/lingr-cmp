@@ -48,7 +48,7 @@ gradlePlugin {
         }
         register("cmpLibraryModule") {
             id = "dev.vbaxan.convention.cmp.module.library"
-            implementationClass = "CmpLibraryConventionPlugin"
+            implementationClass = "CmpLibraryModuleConventionPlugin"
         }
         register("cmpFeatureModule") {
             id = "dev.vbaxan.convention.cmp.module.feature"

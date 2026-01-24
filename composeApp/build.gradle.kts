@@ -9,6 +9,11 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.bundles.koin.common)
+
+            implementation(projects.core.data)
+            implementation(projects.core.designsystem)
+            implementation(projects.core.domain)
+            implementation(projects.core.presentation)
         }
 
         desktopMain.dependencies {

@@ -26,6 +26,7 @@ dependencyResolutionManagement {
             }
         }
         mavenCentral()
+        maven(url = "https://jitpack.io")
     }
 }
 
@@ -34,3 +35,7 @@ plugins {
 }
 
 include(":composeApp")
+include(":core:data")
+include(":core:designsystem")
+include(":core:domain")
+include(":core:presentation")
