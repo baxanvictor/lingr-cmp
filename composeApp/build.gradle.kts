@@ -14,6 +14,10 @@ kotlin {
             implementation(projects.core.designsystem)
             implementation(projects.core.domain)
             implementation(projects.core.presentation)
+
+            implementation(projects.feature.workspace.data)
+            implementation(projects.feature.workspace.domain)
+            implementation(projects.feature.workspace.presentation)
         }
 
         desktopMain.dependencies {

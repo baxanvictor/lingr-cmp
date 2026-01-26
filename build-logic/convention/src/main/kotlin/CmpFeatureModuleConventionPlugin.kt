@@ -17,14 +17,8 @@ class CmpFeatureModuleConventionPlugin : Plugin<Project> {
                     implementation(
                         project.dependencies.platform(libs.findLibrary("androidx-compose-bom").get())
                     )
-
                     implementation(libs.findLibrary("koin-compose").get())
                     implementation(libs.findLibrary("koin-compose-viewmodel").get())
-
-                    implementation(libs.findLibrary("jetbrains-lifecycle-viewmodel-savedstate").get())
-                    implementation(libs.findLibrary("jetbrains-savedstate").get())
-                    implementation(libs.findLibrary("jetbrains-bundle").get())
-                    implementation(libs.findLibrary("jetbrains-compose-navigation").get())
                 }
             }
         }
