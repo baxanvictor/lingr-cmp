@@ -52,6 +52,18 @@ val Typography @Composable get() = Typography(
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp,
         lineHeight = 20.sp
+    ),
+    labelSmall = TextStyle(
+        fontFamily = Inter,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 14.sp,
+        lineHeight = 20.sp
+    ),
+    labelMedium = TextStyle(
+        fontFamily = Inter,
+        fontWeight = FontWeight.Medium,
+        fontSize = 16.sp,
+        lineHeight = 24.sp
     )
 )
 

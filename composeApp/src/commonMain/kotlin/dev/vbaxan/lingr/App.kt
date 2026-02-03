@@ -16,12 +16,9 @@ fun App(
     isDarkTheme: Boolean = isSystemInDarkTheme()
 ) {
     LingrTheme(darkTheme = isDarkTheme) {
-        Scaffold { innerPadding ->
-            NavigationRoot(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding)
-            )
-        }
+        NavigationRoot(
+            modifier = Modifier
+                .fillMaxSize()
+        )
     }
 }

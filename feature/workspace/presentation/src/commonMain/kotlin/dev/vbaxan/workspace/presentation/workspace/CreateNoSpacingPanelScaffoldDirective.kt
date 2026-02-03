@@ -10,16 +10,7 @@ import dev.vbaxan.core.presentation.util.currentDeviceConfiguration
 
 @Composable
 internal fun createNoSpacingPanelScaffoldDirective(): PaneScaffoldDirective {
-    val configuration = currentDeviceConfiguration()
     val windowAdaptiveInfo = currentWindowAdaptiveInfo()
-
-    val maxHorizontalPartitions = when (configuration) {
-        DeviceConfiguration.MOBILE_PORTRAIT,
-        DeviceConfiguration.MOBILE_LANDSCAPE,
-        DeviceConfiguration.TABLET_PORTRAIT -> 1
-        DeviceConfiguration.TABLET_LANDSCAPE,
-        DeviceConfiguration.DESKTOP -> 2
-    }
 
     val verticalPartitionSpacerSize: Dp
     val maxVerticalPartitions: Int
@@ -33,7 +24,7 @@ internal fun createNoSpacingPanelScaffoldDirective(): PaneScaffoldDirective {
     }
 
     return PaneScaffoldDirective(
-        maxHorizontalPartitions = maxHorizontalPartitions,
+        maxHorizontalPartitions = paneScaffoldDirectiveMaxHorizontalPartitions(),
         horizontalPartitionSpacerSize = 0.dp,
         maxVerticalPartitions = maxVerticalPartitions,
         verticalPartitionSpacerSize = verticalPartitionSpacerSize,

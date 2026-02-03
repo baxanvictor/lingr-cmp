@@ -7,6 +7,7 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.core.data)
             implementation(projects.core.domain)
+            implementation(projects.core.platform)
 
             implementation(projects.feature.workspace.domain)
 

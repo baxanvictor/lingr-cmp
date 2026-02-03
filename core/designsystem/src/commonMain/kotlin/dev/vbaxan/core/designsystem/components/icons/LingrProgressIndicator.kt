@@ -1,4 +1,4 @@
-package dev.vbaxan.core.designsystem.components.icon
+package dev.vbaxan.core.designsystem.components.icons
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CircularProgressIndicator

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+    <string name="advanced">Advanced</string>
+    <string name="user_applications">User Applications</string>
+    <string name="user_applications_desc">User-installed apps</string>
+    <string name="application_support">Application Support</string>
+    <string name="application_support_desc">App data left behind after uninstall</string>
+    <string name="caches">Caches</string>
+    <string name="caches_desc">Leftover vache folders from removed apps</string>
+    <string name="logs">Logs</string>
+    <string name="logs_desc">Forgotten logs from long-removed apps</string>
+    <string name="preferences">Preferences</string>
+    <string name="preferences_desc">.plist leftovers</string>
+    <string name="launch_agents">Launch Agents</string>
+    <string name="launch_agents_desc">Orphaned background jobs</string>
+    <string name="local_share">Local Share</string>
+    <string name="local_share_desc">Primary graveyard of removed apps</string>
+    <string name="cache">Cache</string>
+    <string name="cache_desc">User cache</string>
+    <string name="config">Config</string>
+    <string name="config_desc">Old app configs after uninstall</string>
+    <string name="local_bin">Local Bin</string>
+    <string name="local_bin_desc">Leftover binaries</string>
+    <string name="local_libs">Local Libs</string>
+    <string name="local_libs_desc">Broken symlinks</string>
+    <string name="desktop_files">Desktop Files</string>
+    <string name="desktop_files_desc">Orphaned .desktop entries\nBroken launchers</string>
+    <string name="plus_x_more">+%1$d more</string>
+    <string name="scan_targets">Scan targets</string>
+    <string name="scanning">Scanning</string>
+    <string name="select_recommended_targets">Select recommended targets</string>
+</resources>

@@ -10,7 +10,7 @@ internal val SignalTeal800 = Color(0xFF2A5662)
 internal val SignalTeal900 = Color(0xFF1E3F48)
 
 // Neutral Stack - Graphite (Cool)
-internal val Base1000 = Color(0xFF0E1114)  // background
+internal val Base1000 = Color(0xFF0E1114) // background
 internal val Base950 = Color(0xFF141A1F)  // surface
 internal val Base900 = Color(0xFF1D262D)  // surface variant
 internal val Base800 = Color(0xFF2A3640)

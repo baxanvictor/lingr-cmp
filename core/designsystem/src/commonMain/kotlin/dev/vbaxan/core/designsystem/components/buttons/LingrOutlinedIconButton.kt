@@ -14,7 +14,7 @@ import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun LingrIconButton(
+fun LingrOutlinedIconButton(
     onClick: () -> Unit,
     displayBorder: Boolean = true,
     containerColor: Color = MaterialTheme.colorScheme.surface,

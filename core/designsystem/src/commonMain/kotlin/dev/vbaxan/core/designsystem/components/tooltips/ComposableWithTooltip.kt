@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package dev.vbaxan.core.designsystem.components.tooltip
+package dev.vbaxan.core.designsystem.components.tooltips
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.ExperimentalMaterial3Api
