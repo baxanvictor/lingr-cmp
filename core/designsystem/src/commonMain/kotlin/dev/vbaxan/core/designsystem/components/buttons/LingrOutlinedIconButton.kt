@@ -16,13 +16,15 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun LingrOutlinedIconButton(
     onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     displayBorder: Boolean = true,
     containerColor: Color = MaterialTheme.colorScheme.surface,
-    modifier: Modifier = Modifier,
     content: @Composable () -> Unit
 ) {
     OutlinedIconButton(
         onClick = onClick,
+        enabled = enabled,
         modifier = modifier
             .size(45.dp)
             .pointerHoverIcon(PointerIcon.Hand),

@@ -3,6 +3,7 @@ package dev.vbaxan.workspace.presentation.workspace
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.vbaxan.core.domain.app.AppInfoProvider
+import dev.vbaxan.core.domain.settings.AppSettingsStorage
 import dev.vbaxan.core.platform.SystemClock
 import dev.vbaxan.core.presentation.util.throttleFirst
 import dev.vbaxan.workspace.domain.ScanTargetRepository
@@ -12,6 +13,7 @@ import dev.vbaxan.workspace.presentation.model.ScanTargetUi
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
@@ -22,7 +24,8 @@ import kotlinx.coroutines.launch
 internal class WorkspaceViewModel(
     private val appInfoProvider: AppInfoProvider,
     private val scanTargetRepository: ScanTargetRepository,
-    private val systemClock: SystemClock
+    private val systemClock: SystemClock,
+    private val appSettingsStorage: AppSettingsStorage
 ) : ViewModel() {
     private var hasLoadedInitialData = false
 
@@ -33,6 +36,7 @@ internal class WorkspaceViewModel(
                 initAppInfo()
                 observeToggleScanTargetsIsShowingEvents()
                 observeScanTargets()
+                setDefaultSelectedScanTargets()
                 hasLoadedInitialData = true
             }
         }
@@ -104,6 +108,24 @@ internal class WorkspaceViewModel(
             .launchIn(viewModelScope)
     }
 
+    private fun setDefaultSelectedScanTargets() {
+        viewModelScope.launch {
+            val defaultSelectedTargetTypes = appSettingsStorage
+                .observeAppSettings()
+                .firstOrNull()
+                ?.defaultScanTargetTypes
+                ?: return@launch
+
+            updateScanTargetsState { scanTargetsState ->
+                scanTargetsState.copy(
+                    selectedScanTargets = scanTargetsState.scanTargets.filter { scanTarget ->
+                        defaultSelectedTargetTypes.contains(scanTarget.type)
+                    }
+                )
+            }
+        }
+    }
+
     private fun toggleScanTargetsPickerIsShowing(isShowing: Boolean) {
         viewModelScope.launch {
             toggleScanTargetsPickerIsShowingEvents.emit(isShowing)
@@ -112,14 +134,23 @@ internal class WorkspaceViewModel(
 
     private fun toggleRecommendedTargetsSelection() {
         when (recommendedTargetsSelection()) {
-            RecommendedTargetsSelection.NONE -> updateScanTargetsState { scanTargetsState ->
+            RecommendedTargetsSelection.ALL -> updateScanTargetsState { scanTargetsState ->
                 scanTargetsState.copy(
-                    selectedScanTargets = scanTargetsState.recommendedScanTargets
+                    selectedScanTargets = scanTargetsState.selectedScanTargets.filter { it.isAdvanced }
                 )
             }
             else -> updateScanTargetsState { scanTargetsState ->
                 scanTargetsState.copy(
-                    selectedScanTargets = emptyList()
+                    selectedScanTargets = buildList {
+                        addAll(scanTargetsState.selectedScanTargets)
+                        val remainingRecommendedTargets = scanTargetsState.recommendedScanTargets
+                            .filterNot { target ->
+                                scanTargetsState.selectedScanTargets.any { it.type == target.type}
+                            }
+                        if (remainingRecommendedTargets.isNotEmpty()) {
+                            addAll(remainingRecommendedTargets)
+                        }
+                    }
                 )
             }
         }

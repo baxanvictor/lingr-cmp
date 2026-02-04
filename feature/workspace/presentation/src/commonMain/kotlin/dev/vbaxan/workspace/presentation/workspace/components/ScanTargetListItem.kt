@@ -25,6 +25,9 @@ import dev.vbaxan.core.designsystem.components.checkboxes.LingrCheckbox
 import dev.vbaxan.core.designsystem.components.checkboxes.LingrCheckboxSelectionMode
 import dev.vbaxan.core.designsystem.theme.extended
 import dev.vbaxan.workspace.presentation.model.ScanTargetUi
+import lingr.feature.workspace.presentation.generated.resources.Res
+import lingr.feature.workspace.presentation.generated.resources.may_affect_app_behavior_if_removed
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun ScanTargetListItem(
@@ -36,7 +39,7 @@ internal fun ScanTargetListItem(
 ) {
     val textWidthDp = with(LocalDensity.current) { textWidth.toDp() }
 
-    Column(
+    Row(
         modifier = modifier
             .background(
                 color = if (isSelected) {
@@ -53,11 +56,10 @@ internal fun ScanTargetListItem(
             .padding(
                 horizontal = 16.dp,
                 vertical = 12.dp
-            )
+            ),
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
+        Column {
             LingrCheckbox(
                 modifier = Modifier.size(24.dp),
                 selectionMode = if (isSelected) {
@@ -67,15 +69,17 @@ internal fun ScanTargetListItem(
                 },
                 onClick = onClick
             )
+            Spacer(modifier = Modifier.weight(1f))
+        }
+        Column(
+            verticalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
             Text(
                 text = scanTarget.title.asString(),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.width(textWidthDp)
             )
-        }
-        Row {
-            Spacer(modifier = Modifier.width(32.dp))
             Text(
                 text = scanTarget.path,
                 style = MaterialTheme.typography.extended.monoLabelSmall,
@@ -84,9 +88,6 @@ internal fun ScanTargetListItem(
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.width(textWidthDp)
             )
-        }
-        Row{
-            Spacer(modifier = Modifier.width(32.dp))
             Text(
                 text = scanTarget.description.asString(),
                 style = MaterialTheme.typography.bodySmall,
@@ -95,6 +96,16 @@ internal fun ScanTargetListItem(
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.width(textWidthDp)
             )
+            if (scanTarget.isAdvanced) {
+                Text(
+                    text = stringResource(Res.string.may_affect_app_behavior_if_removed),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.width(textWidthDp)
+                )
+            }
         }
     }
 }

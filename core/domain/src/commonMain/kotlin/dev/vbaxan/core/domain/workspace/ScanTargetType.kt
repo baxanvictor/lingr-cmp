@@ -1,4 +1,4 @@
-package dev.vbaxan.workspace.domain.model
+package dev.vbaxan.core.domain.workspace
 
 sealed interface ScanTargetType {
     sealed interface Macos : ScanTargetType {
@@ -9,6 +9,7 @@ sealed interface ScanTargetType {
             data object Logs : UserLibrary
             data object Preferences : UserLibrary
             data object LaunchAgents : UserLibrary
+            data object SavedApplicationState : UserLibrary
         }
     }
 
@@ -20,6 +21,7 @@ sealed interface ScanTargetType {
             data object LocalBin : User
             data object LocalLibs : User
             data object DesktopFiles : User
+            data object AutostartEntries : User
         }
     }
 }

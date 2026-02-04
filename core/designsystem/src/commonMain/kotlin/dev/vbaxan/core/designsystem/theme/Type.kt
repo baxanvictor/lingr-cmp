@@ -85,6 +85,13 @@ val AppExtendedTypography @Composable get() = ExtendedTypography(
         fontWeight = FontWeight.Medium,
         fontSize = 16.sp,
         lineHeight = 24.sp
+    ),
+    topBarTitle = TextStyle(
+        fontFamily = Inter,
+        fontWeight = FontWeight.Medium,
+        fontSize = 16.sp,
+        lineHeight = 24.sp,
+        letterSpacing = 0.sp
     )
 )
 
@@ -92,5 +99,6 @@ val AppExtendedTypography @Composable get() = ExtendedTypography(
 data class ExtendedTypography(
     val titleXSmall: TextStyle,
     val monoLabelSmall: TextStyle,
-    val monoLabelMedium: TextStyle
+    val monoLabelMedium: TextStyle,
+    val topBarTitle: TextStyle
 )

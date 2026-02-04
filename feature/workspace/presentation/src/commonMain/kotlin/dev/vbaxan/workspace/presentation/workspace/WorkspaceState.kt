@@ -18,6 +18,9 @@ internal data class ScanTargetsState(
     val advancedScanTargets: List<ScanTargetUi>
         get() = scanTargets.filter { it.isAdvanced }
 
+    val hasSelectedScanTargets: Boolean
+        get() = selectedScanTargets.isNotEmpty()
+
     fun isScanTargetSelected(scanTarget: ScanTargetUi): Boolean {
         return selectedScanTargets.any { it.type == scanTarget.type }
     }

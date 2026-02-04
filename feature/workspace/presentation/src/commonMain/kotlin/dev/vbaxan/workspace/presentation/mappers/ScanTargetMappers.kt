@@ -1,12 +1,14 @@
 package dev.vbaxan.workspace.presentation.mappers
 
 import dev.vbaxan.core.presentation.util.UiText
-import dev.vbaxan.workspace.domain.model.ScanTarget
-import dev.vbaxan.workspace.domain.model.ScanTargetType
+import dev.vbaxan.core.domain.workspace.ScanTarget
+import dev.vbaxan.core.domain.workspace.ScanTargetType
 import dev.vbaxan.workspace.presentation.model.ScanTargetUi
 import lingr.feature.workspace.presentation.generated.resources.Res
 import lingr.feature.workspace.presentation.generated.resources.application_support
 import lingr.feature.workspace.presentation.generated.resources.application_support_desc
+import lingr.feature.workspace.presentation.generated.resources.autostart_entries
+import lingr.feature.workspace.presentation.generated.resources.autostart_entries_desc
 import lingr.feature.workspace.presentation.generated.resources.cache
 import lingr.feature.workspace.presentation.generated.resources.cache_desc
 import lingr.feature.workspace.presentation.generated.resources.caches
@@ -27,6 +29,8 @@ import lingr.feature.workspace.presentation.generated.resources.logs
 import lingr.feature.workspace.presentation.generated.resources.logs_desc
 import lingr.feature.workspace.presentation.generated.resources.preferences
 import lingr.feature.workspace.presentation.generated.resources.preferences_desc
+import lingr.feature.workspace.presentation.generated.resources.saved_application_state
+import lingr.feature.workspace.presentation.generated.resources.saved_application_state_desc
 import lingr.feature.workspace.presentation.generated.resources.user_applications
 import lingr.feature.workspace.presentation.generated.resources.user_applications_desc
 import org.jetbrains.compose.resources.StringResource
@@ -66,6 +70,11 @@ internal fun ScanTarget.toUi(): ScanTargetUi {
             descriptionRes = Res.string.launch_agents_desc
         }
 
+        ScanTargetType.Macos.UserLibrary.SavedApplicationState -> {
+            titleRes = Res.string.saved_application_state
+            descriptionRes = Res.string.saved_application_state_desc
+        }
+
         ScanTargetType.Linux.User.LocalShare -> {
             titleRes = Res.string.local_share
             descriptionRes = Res.string.local_share_desc
@@ -94,6 +103,11 @@ internal fun ScanTarget.toUi(): ScanTargetUi {
         ScanTargetType.Linux.User.DesktopFiles -> {
             titleRes = Res.string.desktop_files
             descriptionRes = Res.string.desktop_files_desc
+        }
+
+        ScanTargetType.Linux.User.AutostartEntries -> {
+            titleRes = Res.string.autostart_entries
+            descriptionRes = Res.string.autostart_entries_desc
         }
     }
 

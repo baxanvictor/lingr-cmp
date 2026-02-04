@@ -2,8 +2,8 @@ package dev.vbaxan.workspace.data
 
 import dev.vbaxan.core.platform.DesktopOs
 import dev.vbaxan.core.platform.PlatformUtils
-import dev.vbaxan.workspace.domain.model.ScanTarget
-import dev.vbaxan.workspace.domain.model.ScanTargetType
+import dev.vbaxan.core.domain.workspace.ScanTarget
+import dev.vbaxan.core.domain.workspace.ScanTargetType
 
 actual class PlatformScanTargetProvider(
     private val platformUtils: PlatformUtils
@@ -16,6 +16,7 @@ actual class PlatformScanTargetProvider(
             linuxUserLocalBinScanTarget(),
             linuxUserLocalLibsScanTarget(),
             linuxUserDesktopApplicationsScanTarget(),
+            linuxUserAutostartEntriesScanTarget()
         )
         DesktopOs.MACOS -> listOf(
             macosUserApplicationsScanTarget(),
@@ -24,6 +25,7 @@ actual class PlatformScanTargetProvider(
             macosUserLibraryLogsScanTarget(),
             macosUserLibraryPreferencesScanTarget(),
             macosUserLibraryLaunchAgentsScanTarget(),
+            macosUserLibraryApplicationSavedStateScanTarget()
         )
         else -> emptyList()
     }
@@ -62,6 +64,12 @@ private fun linuxUserDesktopApplicationsScanTarget() = ScanTarget(
     isAdvanced = true
 )
 
+private fun linuxUserAutostartEntriesScanTarget() = ScanTarget(
+    type = ScanTargetType.Linux.User.AutostartEntries,
+    path = "~/.config/autostart",
+    isAdvanced = true
+)
+
 private fun macosUserApplicationsScanTarget() = ScanTarget(
     type = ScanTargetType.Macos.UserApplications,
     path = "~/Applications"
@@ -91,5 +99,11 @@ private fun macosUserLibraryPreferencesScanTarget() = ScanTarget(
 private fun macosUserLibraryLaunchAgentsScanTarget() = ScanTarget(
     type = ScanTargetType.Macos.UserLibrary.LaunchAgents,
     path = "~/Library/LaunchAgents",
+    isAdvanced = true
+)
+
+private fun macosUserLibraryApplicationSavedStateScanTarget() = ScanTarget(
+    type = ScanTargetType.Macos.UserLibrary.SavedApplicationState,
+    path = "~/Library/Saved Application State",
     isAdvanced = true
 )

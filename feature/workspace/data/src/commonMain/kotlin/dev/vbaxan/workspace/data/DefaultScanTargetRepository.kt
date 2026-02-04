@@ -1,7 +1,7 @@
 package dev.vbaxan.workspace.data
 
 import dev.vbaxan.workspace.domain.ScanTargetRepository
-import dev.vbaxan.workspace.domain.model.ScanTarget
+import dev.vbaxan.core.domain.workspace.ScanTarget
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

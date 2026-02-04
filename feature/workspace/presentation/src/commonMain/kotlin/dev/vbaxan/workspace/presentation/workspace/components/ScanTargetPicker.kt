@@ -8,6 +8,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.dp
@@ -21,15 +23,16 @@ import dev.vbaxan.workspace.presentation.model.ScanTargetUi
 import dev.vbaxan.workspace.presentation.workspace.ScanTargetsState
 import lingr.feature.workspace.presentation.generated.resources.Res
 import lingr.feature.workspace.presentation.generated.resources.advanced
+import lingr.feature.workspace.presentation.generated.resources.may_affect_app_behavior_if_removed
 import lingr.feature.workspace.presentation.generated.resources.scan_targets
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun ScanTargetPicker(
     scanTargetsState: ScanTargetsState,
+    recommendedTargetsSelection: RecommendedTargetsSelection,
     onClick: () -> Unit,
     onDismiss: () -> Unit,
-    recommendedTargetsSelection: RecommendedTargetsSelection,
     onSelectRecommendedTargetsClick: () -> Unit,
     onScanTargetItemClick: (ScanTargetUi) -> Unit,
     modifier: Modifier = Modifier,
@@ -40,7 +43,9 @@ internal fun ScanTargetPicker(
             ScanTargetsPopupTrigger(
                 selectedScanTargets = scanTargetsState.selectedScanTargets,
                 onClick = onClick,
-                isArrowIconRotated = scanTargetsState.isPickerShowing
+                isArrowIconRotated = scanTargetsState.isPickerShowing,
+                modifier = Modifier
+                    .pointerHoverIcon(PointerIcon.Hand)
             )
         },
         popupContent = {
@@ -55,11 +60,13 @@ internal fun ScanTargetPicker(
             }
 
             val advancedTitle = stringResource(Res.string.advanced)
+            val advancedDisclaimer = stringResource(Res.string.may_affect_app_behavior_if_removed)
 
             val titleStyle = MaterialTheme.typography.bodySmall
             val pathStyle = MaterialTheme.typography.extended.monoLabelSmall
             val descriptionStyle = MaterialTheme.typography.bodySmall
             val advancedTitleStyle = MaterialTheme.typography.labelMedium
+            val advancedDisclaimerStyle = MaterialTheme.typography.bodySmall
 
             val textMeasurer = rememberTextMeasurer()
 
@@ -86,6 +93,10 @@ internal fun ScanTargetPicker(
                     textMeasurer.measure(
                         text = advancedTitle,
                         style = advancedTitleStyle
+                    ).size.width,
+                    textMeasurer.measure(
+                        text = advancedDisclaimer,
+                        style = advancedDisclaimerStyle
                     ).size.width
                 ).maxOf { it }
             }

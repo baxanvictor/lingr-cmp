@@ -1,7 +1,7 @@
 package dev.vbaxan.workspace.presentation.model
 
 import dev.vbaxan.core.presentation.util.UiText
-import dev.vbaxan.workspace.domain.model.ScanTargetType
+import dev.vbaxan.core.domain.workspace.ScanTargetType
 
 data class ScanTargetUi(
     val type: ScanTargetType,

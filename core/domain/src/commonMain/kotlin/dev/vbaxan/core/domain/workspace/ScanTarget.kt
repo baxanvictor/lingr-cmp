@@ -1,4 +1,4 @@
-package dev.vbaxan.workspace.domain.model
+package dev.vbaxan.core.domain.workspace
 
 data class ScanTarget(
     val type: ScanTargetType,

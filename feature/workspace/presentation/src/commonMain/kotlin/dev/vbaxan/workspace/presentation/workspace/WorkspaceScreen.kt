@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.layout.AnimatedPane
 import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffold
@@ -21,7 +20,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import dev.vbaxan.workspace.presentation.workspace.components.ScanTargetPicker
+import dev.vbaxan.workspace.presentation.workspace.components.ActionArgs
+import dev.vbaxan.workspace.presentation.workspace.components.ScanTargetsArgs
+import dev.vbaxan.workspace.presentation.workspace.components.WorkspaceTopAppBar
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -40,31 +41,32 @@ internal fun WorkspaceScreen(
     Scaffold(
         modifier = modifier.fillMaxSize(),
         topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = state.appInfo.appName,
-                        textAlign = TextAlign.Center
-                    )
-                },
-                actions = {
-                    ScanTargetPicker(
-                        scanTargetsState = state.scanTargets,
-                        onClick = {
-                            viewModel.onAction(WorkspaceAction.ScanTargets.OnPickerClick)
-                        },
-                        onDismiss = {
-                            viewModel.onAction(WorkspaceAction.ScanTargets.OnPickerDismiss)
-                        },
-                        recommendedTargetsSelection = viewModel.recommendedTargetsSelection(),
-                        onSelectRecommendedTargetsClick = {
-                            viewModel.onAction(WorkspaceAction.ScanTargets.OnSelectRecommendedTargetsClick)
-                        },
-                        onScanTargetItemClick = { scanTarget ->
-                            viewModel.onAction(WorkspaceAction.ScanTargets.OnScanTargetClick(scanTarget))
-                        }
-                    )
-                }
+            WorkspaceTopAppBar(
+                appName = state.appInfo.appName,
+                actionArgs = ActionArgs(
+                    onScanClick = {
+
+                    },
+                    onSettingsClick = {
+
+                    }
+                ),
+                scanTargetsArgs = ScanTargetsArgs(
+                    scanTargetsState = state.scanTargets,
+                    recommendedTargetsSelection = viewModel.recommendedTargetsSelection(),
+                    onScanTargetsPickerClick = {
+                        viewModel.onAction(WorkspaceAction.ScanTargets.OnPickerClick)
+                    },
+                    onScanTargetsPickerDismiss = {
+                        viewModel.onAction(WorkspaceAction.ScanTargets.OnPickerDismiss)
+                    },
+                    onSelectRecommendedTargetsClick = {
+                        viewModel.onAction(WorkspaceAction.ScanTargets.OnSelectRecommendedTargetsClick)
+                    },
+                    onScanTargetItemClick = { scanTarget ->
+                        viewModel.onAction(WorkspaceAction.ScanTargets.OnScanTargetClick(scanTarget))
+                    }
+                )
             )
         },
         bottomBar = {
